@@ -1,13 +1,12 @@
-#include "Map.h"
+#include "Game.h"
 
 #include <iostream>
 
 int main()
 {
-  Map::Parameters ps;
+  Game g;
 
-  Map map(ps);
-  map.printAscii(std::cout);
+  g.run();
 
   return EXIT_SUCCESS;
 }

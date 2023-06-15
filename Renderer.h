@@ -1,0 +1,18 @@
+#ifndef __RENDERER_H
+#define __RENDERER_H
+
+#include "Error.h"
+#include "Map.h"
+
+class Renderer {
+  public:
+    Renderer(Map* map) : m_Map(map) {}
+    virtual ~Renderer() {};
+
+    virtual game_error_t draw() = 0;
+
+  protected:
+    const Map* m_Map;
+};
+
+#endif
