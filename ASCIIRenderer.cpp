@@ -30,9 +30,13 @@ game_error_t ASCIIRenderer::draw()
   std::cout << std::string(m_Map->width() + 2, '-') << std::endl;
   for (unsigned int y = 0; y < m_Map->height(); y++) {
     std::cout << "|";
-    COLOR(TXT, BLUE, NORMAL);
     for (unsigned int x = 0; x < m_Map->width(); x++) {
-      std::cout << getAscii(m_Map->getTile(x, y).food, 99, true);
+      if (m_Map->getTile(x, y).elevation > 0) {
+        COLOR(BG, GREEN, NORMAL);
+      } else {
+        COLOR(BG, BLUE, NORMAL);
+      }
+      std::cout << " ";
     }
     RESET_COLOR;
     std::cout << "|" << std::endl;
