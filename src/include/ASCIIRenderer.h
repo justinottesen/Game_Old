@@ -11,7 +11,8 @@ class ASCIIRenderer : public Renderer {
     game_error_t draw();
   private:
 
-    void setColor(Color color, ColorMode mode) { std::cout << ASCIIColor256(color, mode); }
+    void setColor(ASCIIColor256::Color color, ASCIIColor256::Mode mode) 
+      { std::cout << ASCIIColor256(color, mode); }
     void setColor(const ASCIIColor256& color) { std::cout << color; }
     void resetColor() { std::cout << ASCIIColor256::RESET(); }
 

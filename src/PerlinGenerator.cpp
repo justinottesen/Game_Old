@@ -28,17 +28,15 @@ float PerlinGenerator::operator()(float x, float y) {
 }
 
 float PerlinGenerator::interpolate(float a0, float a1, float w) {
-  /* // You may want clamping by inserting:
-   * if (0.0 > w) return a0;
-   * if (1.0 < w) return a1;
-   */
-  return (a1 - a0) * w + a0;
-  /* // Use this cubic interpolation [[Smoothstep]] instead, for a smooth appearance:
-   * return (a1 - a0) * (3.0 - w * 2.0) * w * w + a0;
-   *
-   * // Use [[Smootherstep]] for an even smoother result with a second derivative equal to zero on boundaries:
-   * return (a1 - a0) * ((w * (w * 6.0 - 15.0) + 10.0) * w * w * w) + a0;
-   */
+  if (0.0 > w) { return a0; }
+  if (1.0 < w) { return a1; }
+  //return (a1 - a0) * w + a0;
+  // Use this cubic interpolation [[Smoothstep]] instead, for a smooth appearance:
+  return (a1 - a0) * (3.0 - w * 2.0) * w * w + a0;
+  
+  // Use [[Smootherstep]] for an even smoother result with a second derivative equal to zero on boundaries:
+  //return (a1 - a0) * ((w * (w * 6.0 - 15.0) + 10.0) * w * w * w) + a0;
+  
 }
 
 std::pair<float, float> PerlinGenerator::randomGradient(int ix, int iy) {
@@ -46,10 +44,10 @@ std::pair<float, float> PerlinGenerator::randomGradient(int ix, int iy) {
   const unsigned w = 8 * sizeof(unsigned);
   const unsigned s = w / 2; // rotation width
   unsigned a = ix, b = iy;
-  a *= 3284157443; b ^= a << s | a >> (w-s);
-  b *= 1911520717; a ^= b << s | b >> (w-s);
-  a *= 2048419325;
-  float random = a * (3.14159265 / ~(~0u >> 1)); // in [0, 2*Pi]
+  a *= 3284157443 * m_Seed; b ^= a << s | a >> (w-s);
+  b *= 1911520717 * m_Seed; a ^= b << s | b >> (w-s);
+  a *= 2048419325 * m_Seed;
+  float random = a * m_Seed * (3.14159265 / ~(~0u >> 1)); // in [0, 2*Pi]
   std::pair<float, float> v = std::make_pair<float, float>(std::cos(random), std::sin(random));
   return v;
 }

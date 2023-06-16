@@ -8,15 +8,18 @@ game_error_t ASCIIRenderer::draw()
   for (unsigned int y = 0; y < m_Map->height(); y++) {
     std::cout << "|";
     for (unsigned int x = 0; x < m_Map->width(); x++) {
-      if (m_Map->getTile(x, y).elevation > 50) {
-        setColor(OLIVE, BG);
-      } else if (m_Map->getTile(x, y).elevation > 0) {
-        setColor(GREEN, BG);
-      } else if (m_Map->getTile(x, y).elevation > -5) {
-        setColor(BLUE, BG);
-      } else {
-        setColor(NAVY, BG);
+      const Tile& t = m_Map->getTile(x, y);
+      // SET HIGHLIGHT COLOR
+      switch (t.type) {
+        case Tile::LAND:
+          setColor(ASCIIColor256::GREEN, ASCIIColor256::HIGHLIGHT);
+          break;
+        case Tile::WATER:
+          setColor(ASCIIColor256::BLUE, ASCIIColor256::HIGHLIGHT);
+          break;
       }
+      // TODO: SET TEXT COLOR
+      // TODO: SET TEXT VALUE
       std::cout << " ";
     }
     resetColor();

@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-ASCIIColor256::ASCIIColor256(grayscale g, ColorMode m) : m_Mode(m) {
+ASCIIColor256::ASCIIColor256(Grayscale g, Mode m) : m_Mode(m) {
   assert(0 <= g && g <= 100);
   g /= 4;
   switch (g) {
@@ -12,9 +12,9 @@ ASCIIColor256::ASCIIColor256(grayscale g, ColorMode m) : m_Mode(m) {
   }
 }
 
-ASCIIColor256::ASCIIColor256(Color c, ColorMode m) : m_Color(c), m_Mode(m) {}
+ASCIIColor256::ASCIIColor256(Color c, Mode m) : m_Color(c), m_Mode(m) {}
 
-ASCIIColor256::ASCIIColor256(int r, int g, int b, ColorMode m) : m_Color(16 + 36*r + 6*g + b), m_Mode(m) {
+ASCIIColor256::ASCIIColor256(int r, int g, int b, Mode m) : m_Color(16 + 36*r + 6*g + b), m_Mode(m) {
   assert(0 <= r && r <= 6); assert(0 <= g && g <= 6); assert(0 <= b && b <= 6);
 }
 

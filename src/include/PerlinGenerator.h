@@ -7,7 +7,7 @@
 
 class PerlinGenerator {
   public:
-    PerlinGenerator(unsigned int seed = 0) { srand(seed); }
+    PerlinGenerator(unsigned int seed = 0) : m_Seed(seed) {}
 
     // Compute Perlin noise at coordinates x, y
     float operator()(float x, float y);
@@ -22,6 +22,8 @@ class PerlinGenerator {
 
     // Computes the dot product of the distance and gradient vectors.
     float dotGridGradient(int ix, int iy, float x, float y);
+
+    unsigned int m_Seed;
 };
 
 #endif
