@@ -12,10 +12,10 @@ game_error_t ASCIIRenderer::draw()
       // SET HIGHLIGHT COLOR
       switch (t.type) {
         case Tile::LAND:
-          setColor(ASCIIColor256::GREEN, ASCIIColor256::HIGHLIGHT);
+          setColor(ASCIIColor256(0, 3, 1, ASCIIColor256::HIGHLIGHT));
           break;
         case Tile::WATER:
-          setColor(ASCIIColor256::BLUE, ASCIIColor256::HIGHLIGHT);
+          setColor(ASCIIColor256(0, 2, 4, ASCIIColor256::HIGHLIGHT));
           break;
       }
       // TODO: SET TEXT COLOR
