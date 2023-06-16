@@ -1,11 +1,14 @@
 ascii: ascii_comp
-	./ascii.out
+	./bin/ascii.out
 
 sfml: sfml_comp
-	./sfml.out
+	./bin/sfml.out
 
-ascii_comp:
-	g++ *.cpp -o ascii.out -Wall -Wextra -g -std=c++11
+ascii_comp: bin
+	g++ src/*.cpp src/renderer/ASCII*.cpp -o bin/ascii.out -Wall -Wextra -g -std=c++11 -I src/include -D RENDERER=ASCIIRenderer
 
-sfml_comp:
-	g++ *.cpp -o sfml.out -Wall -Wextra -g -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system -D RENDERER=SFMLRenderer
+sfml_comp: bin
+	g++ src/*.cpp src/renderer/SFML*.cpp -o bin/sfml.out -Wall -Wextra -g -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system -I src/include -D RENDERER=SFMLRenderer
+
+bin:
+	mkdir -p bin
