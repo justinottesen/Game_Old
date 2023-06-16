@@ -12,3 +12,6 @@ sfml_comp: bin
 
 bin:
 	mkdir -p bin
+
+clean:
+	rm -rf bin

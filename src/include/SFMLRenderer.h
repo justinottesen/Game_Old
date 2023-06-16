@@ -7,7 +7,7 @@ class SFMLRenderer : public Renderer {
   public:
     SFMLRenderer(const Map* map);
 
-    game_error_t draw() const;
+    game_error_t draw();
   private:
 
 };
