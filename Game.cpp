@@ -1,16 +1,9 @@
 #include "Game.h"
 
 #include "ASCIIRenderer.h"
-#include "SFMLRenderer.h"
-
-#if defined(RENDERER)
-  typedef RENDERER _Renderer;
-#else
-  typedef ASCIIRenderer _Renderer;
-#endif
 
 Game::Game() : m_Map(new Map()), 
-               m_Renderer(new _Renderer(m_Map))
+               m_Renderer(new ASCIIRenderer(m_Map))
 {
   
 }

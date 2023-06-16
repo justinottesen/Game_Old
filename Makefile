@@ -5,7 +5,7 @@ sfml: sfml_comp
 	./sfml.out
 
 ascii_comp:
-	g++ *.cpp -o ascii.out -Wall -Wextra -g -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system
+	g++ *.cpp -o ascii.out -Wall -Wextra -g -std=c++11
 
 sfml_comp:
 	g++ *.cpp -o sfml.out -Wall -Wextra -g -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system -D RENDERER=SFMLRenderer
