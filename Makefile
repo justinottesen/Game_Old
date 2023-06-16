@@ -1,8 +1,11 @@
-main: comp
-	./a.out
+ascii: ascii_comp
+	./ascii.out
 
-mem: comp
-	valgrind ./a.out
+sfml: sfml_comp
+	./sfml.out
 
-comp:
-	g++ *.cpp -Wall -Wextra -g -std=c++11
+ascii_comp:
+	g++ *.cpp -o ascii.out -Wall -Wextra -g -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system
+
+sfml_comp:
+	g++ *.cpp -o sfml.out -Wall -Wextra -g -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system -D RENDERER=SFMLRenderer

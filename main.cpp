@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <ctime>
+
 int main()
 {
   std::srand(std::time(NULL));

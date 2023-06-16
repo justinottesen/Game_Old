@@ -1,10 +1,12 @@
 #include "ASCIIRenderer.h"
 
+#include <cstring>
+
 #define COLOR(txt_bg, col, bright) \
         std::cout << "\033[" txt_bg col bright "m"
 
 // txt_bg
-#define TXT      "3"
+#define TXT       "3"
 #define BG        "4"
 
 // col
@@ -25,14 +27,21 @@
 #define BG_COLOR(x)     std::cout << "\033"
 #define RESET_COLOR     std::cout << "\033[0m"
 
-game_error_t ASCIIRenderer::draw()
+game_error_t ASCIIRenderer::draw() const
 {
+  int min_elevation = 999, max_elevation = -999;
   std::cout << std::string(m_Map->width() + 2, '-') << std::endl;
   for (unsigned int y = 0; y < m_Map->height(); y++) {
     std::cout << "|";
     for (unsigned int x = 0; x < m_Map->width(); x++) {
-      if (m_Map->getTile(x, y).elevation > 0) {
+      min_elevation = std::min(min_elevation, m_Map->getTile(x, y).elevation);
+      max_elevation = std::max(max_elevation, m_Map->getTile(x, y).elevation);
+      if (m_Map->getTile(x, y).elevation > 50) {
+        COLOR(BG, YELLOW, NORMAL);
+      } else if (m_Map->getTile(x, y).elevation > 0) {
         COLOR(BG, GREEN, NORMAL);
+      } else if (m_Map->getTile(x, y).elevation > -5) {
+        COLOR(BG, CYAN, NORMAL);
       } else {
         COLOR(BG, BLUE, NORMAL);
       }
@@ -43,7 +52,8 @@ game_error_t ASCIIRenderer::draw()
   }
   std::cout << std::string(m_Map->width() + 2, '-') << std::endl;
 
-  std::cout << std::endl;
+  std::cout << "MIN: " << min_elevation << std::endl;
+  std::cout << "MAX: " << max_elevation << std::endl;
 
   RESET_COLOR;
   return ERROR_NONE;

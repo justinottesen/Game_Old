@@ -2,7 +2,7 @@
 #define __GAME_H
 
 #include "Map.h"
-#include "ASCIIRenderer.h"
+#include "Renderer.h"
 
 class Game {
   public:

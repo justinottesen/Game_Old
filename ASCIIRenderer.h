@@ -5,9 +5,9 @@
 
 class ASCIIRenderer : public Renderer {
   public:
-    ASCIIRenderer(Map* map) : Renderer(map) {}
+    ASCIIRenderer(const Map* map) : Renderer(map) {}
 
-    game_error_t draw();
+    game_error_t draw() const;
   private:
 
     const char* asciiScale = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";

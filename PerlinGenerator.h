@@ -3,6 +3,8 @@
 
 #include <utility>
 
+#include <cmath>
+
 class PerlinGenerator {
   public:
     PerlinGenerator(unsigned int seed = 0) { srand(seed); }

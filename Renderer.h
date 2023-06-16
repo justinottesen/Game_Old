@@ -6,10 +6,10 @@
 
 class Renderer {
   public:
-    Renderer(Map* map) : m_Map(map) {}
+    Renderer(const Map* map) : m_Map(map) {}
     virtual ~Renderer() {};
 
-    virtual game_error_t draw() = 0;
+    virtual game_error_t draw() const = 0;
 
   protected:
     const Map* m_Map;

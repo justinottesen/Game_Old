@@ -4,7 +4,7 @@
 #include <iostream>
 
 struct Tile {
-  int elevation = 0;      // Value -30 to 100
+  int elevation = 0;
 };
 
 struct MapParameters {
@@ -12,8 +12,8 @@ struct MapParameters {
   unsigned int width                = 200;
   unsigned int height               = 50;
   // Terrain Parameters
-  unsigned int zoom                 = 5;
-  unsigned int shift                = 10;
+  unsigned int zoom                 = 9;
+  unsigned int shift                = 0;
   unsigned int water_amt            = 30;
 };
 
