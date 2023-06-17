@@ -1,6 +1,9 @@
 ascii: ascii_comp
 	./bin/ascii.out
 
+mem: ascii_comp
+	valgrind ./bin/ascii.out
+
 sfml: sfml_comp
 	./bin/sfml.out
 
