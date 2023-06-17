@@ -3,7 +3,7 @@
 #include "ASCIIRenderer.h"
 
 Game::Game() : m_Map(new Map()), 
-               m_Renderer(new ASCIIRenderer(m_Map))
+               m_Renderer(new ASCIIRenderer(m_Map, 200, 50, 0, 0))
 {
   
 }

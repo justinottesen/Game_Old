@@ -6,11 +6,16 @@
 
 class ASCIIRenderer : public Renderer {
   public:
-    ASCIIRenderer(const Map* map) : Renderer(map) {}
+    ASCIIRenderer(const Map* map, 
+                  unsigned int viewWidth, unsigned int viewHeight,
+                  unsigned int viewX,     unsigned int viewY) : Renderer(map), 
+                                                                m_ViewWidth(viewWidth),
+                                                                m_ViewHeight(viewHeight),
+                                                                m_ViewX(viewX),
+                                                                m_ViewY(viewY) {}
 
     game_error_t draw();
   private:
-
     void setColor(ASCIIColor256::Color color, ASCIIColor256::Mode mode) 
       { std::cout << ASCIIColor256(color, mode); }
     void setColor(const ASCIIColor256& color) { std::cout << color; }
@@ -19,6 +24,12 @@ class ASCIIRenderer : public Renderer {
     const char* asciiScale = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
 
     char getAscii(unsigned int val, unsigned int max, bool reverse);
+
+    unsigned int m_ViewWidth;
+    unsigned int m_ViewHeight;
+
+    unsigned int m_ViewX;
+    unsigned int m_ViewY;
 };
 
 #endif

@@ -4,17 +4,17 @@
 
 game_error_t ASCIIRenderer::draw()
 {
-  std::cout << std::string(m_Map->width() + 2, '-') << std::endl;
-  for (unsigned int y = 0; y < m_Map->height(); y++) {
+  std::cout << std::string(m_ViewWidth + 2, '-') << std::endl;
+  for (unsigned int y = m_ViewY; y < m_ViewY + m_ViewHeight; y++) {
     std::cout << "|";
-    for (unsigned int x = 0; x < m_Map->width(); x++) {
-      const Tile& t = m_Map->getTile(x, y);
+    for (unsigned int x = m_ViewX; x < m_ViewX + m_ViewWidth; x++) {
+      const Map::Tile& t = m_Map->getTile(x, y);
       // SET HIGHLIGHT COLOR
       switch (t.type) {
-        case Tile::LAND:
+        case Map::Tile::LAND:
           setColor(ASCIIColor256(0, 3, 1, ASCIIColor256::HIGHLIGHT));
           break;
-        case Tile::WATER:
+        case Map::Tile::WATER:
           setColor(ASCIIColor256(0, 2, 4, ASCIIColor256::HIGHLIGHT));
           break;
       }
@@ -25,7 +25,7 @@ game_error_t ASCIIRenderer::draw()
     resetColor();
     std::cout << "|" << std::endl;
   }
-  std::cout << std::string(m_Map->width() + 2, '-') << std::endl;
+  std::cout << std::string(m_ViewWidth + 2, '-') << std::endl;
   return ERROR_NONE;
 }
 

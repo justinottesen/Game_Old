@@ -1,6 +1,6 @@
 #include "PerlinGenerator.h"
 
-float PerlinGenerator::operator()(float x, float y) {
+float PerlinGenerator::operator()(float x, float y) const {
   // Determine grid cell coordinates
   int x0 = (int)floor(x);
   int x1 = x0 + 1;
@@ -27,7 +27,7 @@ float PerlinGenerator::operator()(float x, float y) {
   return value; // Will return in range -1 to 1. To make it in range 0 to 1, multiply by 0.5 and add 0.5
 }
 
-float PerlinGenerator::interpolate(float a0, float a1, float w) {
+float PerlinGenerator::interpolate(float a0, float a1, float w) const {
   if (0.0 > w) { return a0; }
   if (1.0 < w) { return a1; }
   //return (a1 - a0) * w + a0;
@@ -39,7 +39,7 @@ float PerlinGenerator::interpolate(float a0, float a1, float w) {
   
 }
 
-std::pair<float, float> PerlinGenerator::randomGradient(int ix, int iy) {
+std::pair<float, float> PerlinGenerator::randomGradient(int ix, int iy) const {
   // No precomputed gradients mean this works for any number of grid coordinates
   const unsigned w = 8 * sizeof(unsigned);
   const unsigned s = w / 2; // rotation width
@@ -48,13 +48,12 @@ std::pair<float, float> PerlinGenerator::randomGradient(int ix, int iy) {
   b *= 1911520717 * m_Seed; a ^= b << s | b >> (w-s);
   a *= 2048419325 * m_Seed;
   float random = a * m_Seed * (3.14159265 / ~(~0u >> 1)); // in [0, 2*Pi]
-  std::pair<float, float> v = std::make_pair<float, float>(std::cos(random), std::sin(random));
-  return v;
+  return std::pair<float, float> (std::cos(random), std::sin(random));
 }
 
-float PerlinGenerator::dotGridGradient(int ix, int iy, float x, float y) {
+float PerlinGenerator::dotGridGradient(int ix, int iy, float x, float y) const {
     // Get gradient from integer coordinates
-    std::pair<float, float> gradient = randomGradient(ix, iy);
+    std::pair<float, float>  gradient = randomGradient(ix, iy);
 
     // Compute the distance vector
     float dx = x - (float)ix;
