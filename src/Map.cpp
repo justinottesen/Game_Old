@@ -19,15 +19,15 @@ const Map::Tile& Map::getTile(int x, int y) const {
 
   int xInChunk = x % static_cast<int>(m_ChunkSize);
   int yInChunk = y % static_cast<int>(m_ChunkSize);
-  // Mod returning negative is implementation based, kind of annoying
+  // Mod with negative is not defined by C++ standard, sanity check
   if (xInChunk < 0) { xInChunk += m_ChunkSize; }
   if (yInChunk < 0) { yInChunk += m_ChunkSize; }
-  if (m_ChunkMap.count(std::make_pair(chunkX, chunkY)) == 0) {
-    m_Chunks.push_back(new Chunk(chunkX, chunkY, m_ElevationGenerator, m_PerlinZoom, 
-                                m_ChunkSize, m_MaxElevation, m_WaterLevel));
-    m_ChunkMap[std::make_pair(chunkX, chunkY)] = m_Chunks.back();
+  if (m_Chunks.count(std::make_pair(chunkX, chunkY)) == 0) {
+    m_Chunks[std::make_pair(chunkX, chunkY)] 
+      = std::make_unique<Chunk>(chunkX, chunkY, m_ElevationGenerator, m_PerlinZoom, 
+                                m_ChunkSize, m_MaxElevation, m_WaterLevel);
   }
-  return m_ChunkMap.find(std::make_pair(chunkX, chunkY))->second->getTile(xInChunk, yInChunk);
+  return m_Chunks[std::make_pair(chunkX, chunkY)]->getTile(xInChunk, yInChunk);
 }
 
 Map::Chunk::Chunk(unsigned int chunkX,
@@ -37,7 +37,7 @@ Map::Chunk::Chunk(unsigned int chunkX,
                   unsigned int chunkSize,
                   unsigned int maxElevation,
                   unsigned int waterLevel) : m_Size(chunkSize),
-                                             m_Tiles(new Tile[m_Size*m_Size]) {
+                                             m_Tiles(std::make_unique<Tile[]>(chunkSize * chunkSize)) {
   for (unsigned int i = 0; i < chunkSize * chunkSize; i++) {
     int x = i % chunkSize + chunkX * chunkSize;
     int y = i / chunkSize + chunkY * chunkSize;

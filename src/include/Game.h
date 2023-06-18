@@ -10,11 +10,9 @@ class Game {
 
     void run();
 
-    ~Game();
-
   private:
-    Map* m_Map;
-    Renderer* m_Renderer;
+    std::unique_ptr<Map> m_Map;
+    std::unique_ptr<Renderer> m_Renderer;
 };
 
 #endif

@@ -1,11 +1,12 @@
 REFERENCES:
-
 Wikipedia - Perlin Noise:
   https://en.wikipedia.org/wiki/Perlin_noise
 Haoyi's Programming Blog - Build your own Command Line with ANSI escape codes
   https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 CPP Reference - std::hash
   https://en.cppreference.com/w/cpp/utility/hash
+CPP Reference - std::unique_ptr
+  https://en.cppreference.com/w/cpp/memory/unique_ptr
 
 CODING CONVENTIONS:
   - use camelCase
@@ -24,5 +25,13 @@ CODING CONVENTIONS:
   - Use static_cast instead of c style casting
   - Do not ignore compiler warnings
   - Do not leak memory
+  - Use smart pointers wherever possible
 
 In general, follow the format you see. Some are more strict than others.
+
+DECISIONS:
+  - Currently each chunk holds a std::unique_ptr<Tile[]>, for runtime determined but fixed size.
+    Options:
+      1. std::unique_ptr<Tile[]>
+      2. std::vector<Tile>
+      3. Compile time determine chunk size, use std::array<Tile, ChunkSize>
