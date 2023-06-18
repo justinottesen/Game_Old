@@ -15,7 +15,9 @@ Map::Map(const Parameters& params) : m_ChunkSize(params.chunkSize),
 
 const Map::Tile& Map::getTile(int x, int y) const {
   int chunkX = x / static_cast<int>(m_ChunkSize);
+  if (x < 0) { chunkX--; }
   int chunkY = y / static_cast<int>(m_ChunkSize);
+  if (y < 0) { chunkY--; }
 
   int xInChunk = x % static_cast<int>(m_ChunkSize);
   int yInChunk = y % static_cast<int>(m_ChunkSize);
