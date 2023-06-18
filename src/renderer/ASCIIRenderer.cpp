@@ -5,10 +5,10 @@
 game_error_t ASCIIRenderer::draw()
 {
   std::cout << std::string(m_ViewWidth + 2, '-') << std::endl;
-  for (unsigned int y = m_ViewY; y < m_ViewY + m_ViewHeight; y++) {
+  for (int worldY = m_ViewY + static_cast<int>(m_ViewHeight+1)/2 - 1; worldY >= m_ViewY - static_cast<int>(m_ViewHeight)/2; worldY--) {
     std::cout << "|";
-    for (unsigned int x = m_ViewX; x < m_ViewX + m_ViewWidth; x++) {
-      const Map::Tile& t = m_Map->getTile(x, y);
+    for (int worldX = m_ViewX - static_cast<int>(m_ViewWidth)/2; worldX < m_ViewX + static_cast<int>(m_ViewWidth+1)/2; worldX++) {
+      const Map::Tile& t = m_Map->getTile(worldX, worldY);
       // SET HIGHLIGHT COLOR
       switch (t.type) {
         case Map::Tile::LAND:

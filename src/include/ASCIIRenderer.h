@@ -8,11 +8,11 @@ class ASCIIRenderer : public Renderer {
   public:
     ASCIIRenderer(const Map* map, 
                   unsigned int viewWidth, unsigned int viewHeight,
-                  unsigned int viewX,     unsigned int viewY) : Renderer(map), 
-                                                                m_ViewWidth(viewWidth),
-                                                                m_ViewHeight(viewHeight),
-                                                                m_ViewX(viewX),
-                                                                m_ViewY(viewY) {}
+                  int viewX, int viewY) : Renderer(map), 
+                                          m_ViewWidth(viewWidth),
+                                          m_ViewHeight(viewHeight),
+                                          m_ViewX(viewX),
+                                          m_ViewY(viewY) {}
 
     game_error_t draw();
   private:
@@ -28,8 +28,8 @@ class ASCIIRenderer : public Renderer {
     unsigned int m_ViewWidth;
     unsigned int m_ViewHeight;
 
-    unsigned int m_ViewX;
-    unsigned int m_ViewY;
+    int m_ViewX;
+    int m_ViewY;
 };
 
 #endif
