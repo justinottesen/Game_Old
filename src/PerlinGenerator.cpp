@@ -1,6 +1,6 @@
 #include "PerlinGenerator.h"
 
-float PerlinGenerator::operator()(float x, float y) const {
+float PerlinGenerator::sample(float x, float y) const {
   // Determine grid cell coordinates
   int x0 = (int)floor(x);
   int x1 = x0 + 1;

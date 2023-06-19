@@ -7,6 +7,8 @@ CPP Reference - std::hash
   https://en.cppreference.com/w/cpp/utility/hash
 CPP Reference - std::unique_ptr
   https://en.cppreference.com/w/cpp/memory/unique_ptr
+Reinventing Minecraft world generation by Henrik Kniberg
+  https://youtu.be/ob3VwY4JyzE
 
 CODING CONVENTIONS:
   - use camelCase
@@ -35,3 +37,9 @@ DECISIONS:
       1. std::unique_ptr<Tile[]>
       2. std::vector<Tile>
       3. Compile time determine chunk size, use std::array<Tile, ChunkSize>
+
+TODO:
+  - Change map generation, make more realistic
+  - Create headquarters building
+  - Add fog for outside view distance
+

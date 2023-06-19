@@ -10,7 +10,7 @@ class PerlinGenerator {
     PerlinGenerator(unsigned int seed = 0) : m_Seed(seed) {}
 
     // Compute Perlin noise at coordinates x, y
-    float operator()(float x, float y) const;
+    float sample(float x, float y) const;
 
   private:
     /* Function to linearly interpolate between a0 and a1
